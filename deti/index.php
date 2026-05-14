@@ -30,23 +30,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="auth-page">
 <div class="stars"></div>
 <div class="container">
-    <div class="auth-card pulse">
-        <h1>Добро пожаловать в ЭнергоКидс ⚡</h1>
-        <p class="subtitle">Введи любой логин и пароль — и начнем приключение!</p>
+    <div class="auth-layout">
+        <div class="left-character-wrap" aria-hidden="true">
+            <img src="assets/images/men_sleva.png" alt="" class="left-character">
+        </div>
 
-        <?php if ($error !== ''): ?>
-            <div class="error-box"><?= $error ?></div>
-        <?php endif; ?>
+        <div class="auth-card pulse">
+            <img src="assets/images/logo_Deti.png" alt="Логотип ЭСВ" class="auth-logo">
+            <h1>Добро пожаловать в ЭнергоКидс ⚡</h1>
+            <p class="subtitle">Введи любой логин и пароль — и начнем приключение!</p>
 
-        <form method="post" class="auth-form">
-            <label for="login">Логин супергероя</label>
-            <input type="text" id="login" name="login" placeholder="Например: kotik123" required>
+            <?php if ($error !== ''): ?>
+                <div class="error-box"><?= $error ?></div>
+            <?php endif; ?>
 
-            <label for="password">Секретный пароль</label>
-            <input type="password" id="password" name="password" placeholder="Любой пароль" required>
+            <form method="post" class="auth-form">
+                <label for="login">Логин супергероя</label>
+                <input type="text" id="login" name="login" placeholder="Например: kotik123" required>
 
-            <button type="submit" id="loginBtn">Войти в кабинет 🚀</button>
-        </form>
+                <label for="password">Секретный пароль</label>
+                <input type="password" id="password" name="password" placeholder="Любой пароль" required>
+
+                <button type="submit" id="loginBtn">Войти в кабинет 🚀</button>
+            </form>
+        </div>
     </div>
 </div>
 
