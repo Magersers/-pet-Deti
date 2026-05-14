@@ -9,6 +9,8 @@ if (!isset($_SESSION['child_user'])) {
 $user = $_SESSION['child_user'];
 $readingError = '';
 $readingSuccess = '';
+$showReceipt = false;
+$receiptData = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentReading = (int) ($_POST['current_reading'] ?? -1);
@@ -16,7 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($currentReading < 0) {
         $readingError = 'Введи корректное показание счётчика, чтобы отправить данные ⚡';
     } else {
-        $readingSuccess = "Отлично! Показание {$currentReading} кВт·ч успешно передано. Ты супер! 🌟";
+        $tariff = 5.67;
+        $serviceFee = 35;
+        $amount = round(($currentReading * $tariff) + $serviceFee, 2);
+        $receiptNumber = 'ESV-' . date('Ymd') . '-' . random_int(1000, 9999);
+
+        $receiptData = [
+            'receiptNumber' => $receiptNumber,
+            'payer' => $user['login'],
+            'currentReading' => $currentReading,
+            'tariff' => number_format($tariff, 2, ',', ' '),
+            'serviceFee' => number_format($serviceFee, 2, ',', ' '),
+            'amount' => number_format($amount, 2, ',', ' '),
+            'period' => date('m.Y'),
+            'date' => date('d.m.Y'),
+        ];
+
+        $readingSuccess = "Отлично! Показание {$currentReading} кВт·ч принято. Этап 3 — готова квитанция на оплату. 🌟";
+        $showReceipt = true;
     }
 }
 ?>
@@ -55,6 +74,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <button type="submit" id="readingBtn">Передать показания ✨</button>
             </form>
+
+            <?php if ($showReceipt): ?>
+                <section class="receipt" aria-label="Квитанция на оплату">
+                    <div class="receipt-head">
+                        <strong>КВИТАНЦИЯ НА ОПЛАТУ ЭЛЕКТРОЭНЕРГИИ</strong>
+                        <span>№ <?= $receiptData['receiptNumber'] ?></span>
+                    </div>
+
+                    <div class="receipt-grid">
+                        <div><span>Получатель:</span> АО «ЭнергоСбыт Детям»</div>
+                        <div><span>ИНН/КПП:</span> 7701234567 / 770101001</div>
+                        <div><span>Плательщик:</span> <?= htmlspecialchars($receiptData['payer'], ENT_QUOTES, 'UTF-8') ?></div>
+                        <div><span>Период:</span> <?= $receiptData['period'] ?></div>
+                        <div><span>Показание:</span> <?= $receiptData['currentReading'] ?> кВт·ч</div>
+                        <div><span>Дата:</span> <?= $receiptData['date'] ?></div>
+                    </div>
+
+                    <table class="receipt-table">
+                        <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th>Тариф</th>
+                            <th>Сумма</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Электроснабжение</td>
+                            <td><?= $receiptData['tariff'] ?> ₽/кВт·ч</td>
+                            <td><?= $receiptData['amount'] ?> ₽</td>
+                        </tr>
+                        <tr>
+                            <td>Сервисный сбор</td>
+                            <td>—</td>
+                            <td><?= $receiptData['serviceFee'] ?> ₽</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="receipt-total">ИТОГО К ОПЛАТЕ: <b><?= $receiptData['amount'] ?> ₽</b></div>
+                    <button type="button" class="pay-btn">Оплатить квитанцию 💳</button>
+                </section>
+            <?php endif; ?>
 
             <a class="logout-btn" href="logout.php">Выйти</a>
         </div>

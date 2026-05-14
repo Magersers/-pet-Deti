@@ -269,3 +269,78 @@ button:hover, .logout-btn:hover {
         width: 100%;
     }
 }
+
+.receipt {
+    margin-top: 18px;
+    background: #fff;
+    border: 2px dashed #5f6ea7;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: left;
+    color: #1d2f66;
+}
+
+.receipt-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #d6dff8;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.receipt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.receipt-grid span {
+    color: #4a5e9c;
+    font-weight: 700;
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+}
+
+.receipt-table th,
+.receipt-table td {
+    border: 1px solid #ced7f1;
+    padding: 6px;
+}
+
+.receipt-table th {
+    background: #eef3ff;
+}
+
+.receipt-total {
+    text-align: right;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.pay-btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(90deg, #2f77ff, #684dff);
+    cursor: pointer;
+}
+
+@media (max-width: 760px) {
+    .receipt-grid {
+        grid-template-columns: 1fr;
+    }
+}
