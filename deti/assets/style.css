@@ -212,3 +212,54 @@ button:hover, .logout-btn:hover {
         font-size: 1rem;
     }
 }
+
+.success-box {
+    margin-bottom: 14px;
+    background: linear-gradient(90deg, #dbffd8, #cbf6ff);
+    border: 1px solid #8de58a;
+    color: #0f6a35;
+    border-radius: 12px;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.meter-layout {
+    max-width: 1180px;
+    gap: 20px;
+}
+
+.meter-character-wrap {
+    width: min(520px, 44vw);
+    min-width: 300px;
+}
+
+.meter-character {
+    border-radius: 22px;
+}
+
+.meter-card {
+    width: min(580px, 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,245,210,0.96));
+}
+
+.meter-form input {
+    background: #ffffff;
+}
+
+@media (max-width: 1000px) {
+    .meter-character-wrap {
+        width: min(460px, 60vw);
+        min-width: 260px;
+    }
+}
+
+@media (max-width: 760px) {
+    .meter-character-wrap {
+        width: min(430px, 86vw);
+        min-width: 0;
+    }
+
+    .meter-card {
+        width: 100%;
+    }
+}

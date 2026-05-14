@@ -33,5 +33,11 @@
         }).on('mouseleave', function () {
             $(this).text('Войти в кабинет 🚀');
         });
+
+        $('#readingBtn').on('mouseenter', function () {
+            $(this).text('Отправить энергию! ⚡');
+        }).on('mouseleave', function () {
+            $(this).text('Передать показания ✨');
+        });
     });
 })(jQuery);
