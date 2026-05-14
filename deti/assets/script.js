@@ -37,7 +37,7 @@
         $('#readingBtn').on('mouseenter', function () {
             $(this).text('Отправить энергию! ⚡');
         }).on('mouseleave', function () {
-            $(this).text('Передать показания ✨');
+            $(this).text('Сформировать квитанцию ✨');
         });
     });
 })(jQuery);

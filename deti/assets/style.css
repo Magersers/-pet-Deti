@@ -344,3 +344,6 @@ button:hover, .logout-btn:hover {
         grid-template-columns: 1fr;
     }
 }
+
+.receipt-page-card { width: min(900px, 100%); animation: none; }
+
