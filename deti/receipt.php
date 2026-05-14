@@ -66,10 +66,22 @@ if (!$receiptData) {
             </table>
 
             <div class="receipt-total">ИТОГО К ОПЛАТЕ: <b><?= htmlspecialchars($receiptData['amount'], ENT_QUOTES, 'UTF-8') ?> ₽</b></div>
-            <button type="button" class="pay-btn">Оплатить квитанцию 💳</button>
+            <button type="button" class="pay-btn" id="payBtn" data-redirect="paid.php">Оплатить квитанцию 💳</button>
         </section>
 
         <a class="logout-btn" href="logout.php">Выйти</a>
+    </div>
+</div>
+
+
+<div class="pay-overlay" id="payOverlay" aria-hidden="true">
+    <div class="pay-modal">
+        <h3>Проводим оплату...</h3>
+        <p>Считаем, проверяем и отправляем платёж ⚡</p>
+        <div class="pay-progress">
+            <div class="pay-progress-bar" id="payProgressBar"></div>
+        </div>
+        <div class="pay-percent" id="payPercent">0%</div>
     </div>
 </div>
 

@@ -39,5 +39,32 @@
         }).on('mouseleave', function () {
             $(this).text('Сформировать квитанцию ✨');
         });
+
+
+        $('#payBtn').on('click', function () {
+            const redirectUrl = $(this).data('redirect') || 'paid.php';
+            const $overlay = $('#payOverlay');
+            const $bar = $('#payProgressBar');
+            const $percent = $('#payPercent');
+
+            let progress = 0;
+            $overlay.addClass('show').attr('aria-hidden', 'false');
+            const timer = setInterval(() => {
+                progress += 4;
+                if (progress > 100) {
+                    progress = 100;
+                }
+
+                $bar.css('width', progress + '%');
+                $percent.text(progress + '%');
+
+                if (progress >= 100) {
+                    clearInterval(timer);
+                    setTimeout(() => {
+                        window.location.href = redirectUrl;
+                    }, 280);
+                }
+            }, 120);
+        });
     });
 })(jQuery);

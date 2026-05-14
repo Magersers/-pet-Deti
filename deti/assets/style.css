@@ -347,3 +347,50 @@ button:hover, .logout-btn:hover {
 
 .receipt-page-card { width: min(900px, 100%); animation: none; }
 
+
+.pay-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 33, 96, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    padding: 16px;
+}
+
+.pay-overlay.show {
+    display: flex;
+}
+
+.pay-modal {
+    width: min(500px, 100%);
+    background: linear-gradient(180deg, #ffffff, #e8f0ff);
+    border-radius: 18px;
+    border: 3px solid #88a8ff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    padding: 22px;
+    text-align: center;
+    color: #1a3f9d;
+}
+
+.pay-progress {
+    margin-top: 14px;
+    width: 100%;
+    height: 16px;
+    border-radius: 999px;
+    background: #d8e3ff;
+    overflow: hidden;
+}
+
+.pay-progress-bar {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #34c9ff, #6f63ff, #ff7cc8);
+    transition: width 0.12s linear;
+}
+
+.pay-percent {
+    margin-top: 8px;
+    font-weight: 800;
+}
