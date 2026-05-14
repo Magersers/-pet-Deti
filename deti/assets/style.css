@@ -237,6 +237,12 @@ button:hover, .logout-btn:hover {
     border-radius: 22px;
 }
 
+
+.meter-logo {
+    width: min(220px, 75%);
+    margin-bottom: 8px;
+}
+
 .meter-card {
     width: min(580px, 100%);
     background: linear-gradient(180deg, rgba(255,255,255,0.97), rgba(255,245,210,0.96));

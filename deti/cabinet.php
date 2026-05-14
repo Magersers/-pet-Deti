@@ -11,17 +11,12 @@ $readingError = '';
 $readingSuccess = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $prevReading = (int) ($_POST['prev_reading'] ?? 0);
-    $currentReading = (int) ($_POST['current_reading'] ?? 0);
-    $month = trim($_POST['month'] ?? '');
+    $currentReading = (int) ($_POST['current_reading'] ?? -1);
 
-    if ($month === '' || $prevReading < 0 || $currentReading < 0) {
-        $readingError = 'Заполни все поля правильно, чтобы мы смогли принять показания ⚡';
-    } elseif ($currentReading < $prevReading) {
-        $readingError = 'Текущее значение не может быть меньше предыдущего. Проверь цифры 👀';
+    if ($currentReading < 0) {
+        $readingError = 'Введи корректное показание счётчика, чтобы отправить данные ⚡';
     } else {
-        $used = $currentReading - $prevReading;
-        $readingSuccess = "Готово! За {$month} передано {$used} кВт·ч. Ты супер! 🌟";
+        $readingSuccess = "Отлично! Показание {$currentReading} кВт·ч успешно передано. Ты супер! 🌟";
     }
 }
 ?>
@@ -42,8 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="auth-card meter-card pulse">
+            <img src="assets/images/logo_Deti.png" alt="Логотип ЭСВ" class="auth-logo meter-logo">
             <h1>Привет, <?= $user['login'] ?>! ⚡</h1>
-            <p class="subtitle">Этап 2: передай показания за электричество и получи звание ЭнергоГероя!</p>
+            <p class="subtitle">Этап 2: передай текущее показание счётчика за электричество и получи звание ЭнергоГероя!</p>
 
             <?php if ($readingError !== ''): ?>
                 <div class="error-box"><?= $readingError ?></div>
@@ -54,12 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <form method="post" class="auth-form meter-form">
-                <label for="month">Месяц передачи</label>
-                <input type="text" id="month" name="month" placeholder="Например: Май 2026" required>
-
-                <label for="prev_reading">Предыдущее показание (кВт·ч)</label>
-                <input type="number" id="prev_reading" name="prev_reading" min="0" placeholder="Например: 1234" required>
-
                 <label for="current_reading">Текущее показание (кВт·ч)</label>
                 <input type="number" id="current_reading" name="current_reading" min="0" placeholder="Например: 1296" required>
 
