@@ -19,19 +19,10 @@ if (!isset($_SESSION['child_user'])) {
 <div class="container">
     <div class="reward-layout">
         <img src="assets/images/nagrada.png" alt="Награда за оплату" class="reward-image">
-        <a class="logout-btn" href="receipt_pdf.php" id="downloadReceiptBtn">Скачать чек (PDF)</a>
         <a class="logout-btn reward-exit-btn" href="logout.php">Выйти</a>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="../jquery-3.7.1.min.js"></script>
 <script src="assets/script.js"></script>
-<script>
-    (function () {
-        const link = document.getElementById('downloadReceiptBtn');
-        if (link) {
-            setTimeout(() => link.click(), 450);
-        }
-    })();
-</script>
 </body>
 </html>
